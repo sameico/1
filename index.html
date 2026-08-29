@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SamEICO — давайте сделаем жизнь в Самаре лучше</title>
+    <meta name="description" content="SamEICO — общественная экологическая инициатива в Самаре.">
+    <meta name="theme-color" content="#2d6a4f">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="img/system/logo.png" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet">
+    <style>
+:root {
+  --forest:#2d6a4f; --forest-deep:#1e4d38; --moss:#3f7d5c; --sage:#95a99c;
+  --blue:#2563eb; --cyan:#0e7490;
+  --paper:#f4f1ea; --cream:#fffdf8; --ink:#1a211c; --muted:#5c6b62;
+  --line:rgba(26,33,28,.12); --glass:rgba(255,253,248,.82);
+  --shadow:0 4px 24px rgba(30,77,56,.07);
+  --gradient-green:linear-gradient(135deg,#1e4d38,#2d6a4f 55%,#3f7d5c);
+  --radius:20px;
+  --font-display:"Unbounded",system-ui,sans-serif;
+  --font-body:"Manrope",system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{overflow-x:clip;-webkit-font-smoothing:antialiased}
+body{font-family:var(--font-body);background:var(--paper);color:var(--ink);line-height:1.6;overflow-x:clip;min-height:100dvh}
+a{text-decoration:none;color:inherit}ul{list-style:none}img{display:block;max-width:100%}button{font-family:inherit}
+.container{max-width:1100px;margin:0 auto;padding:0 12px}
+@media(min-width:640px){.container{padding:0 24px}}
+.gradient-text{background:var(--gradient-green);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.section{display:none;animation:fadeIn .5s ease-out;padding:28px 0 44px}
+.section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.section{animation:none}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 26px;background:var(--forest);color:var(--cream);border-radius:999px;font-weight:600;font-size:.95rem;border:none;cursor:pointer;transition:transform .2s,background .2s,box-shadow .2s}
+.btn:hover{background:var(--forest-deep);transform:translateY(-1px);box-shadow:0 8px 20px rgba(30,77,56,.2)}
+.btn:active{transform:scale(.97)}
+.btn-blue{background:var(--blue)}.btn-blue:hover{background:#1d4ed8;box-shadow:0 8px 20px rgba(37,99,235,.22)}
+.btn-outline{background:var(--cream);color:var(--ink);border:1px solid var(--line)}
+.btn-outline:hover{border-color:var(--forest);color:var(--forest);box-shadow:none;background:var(--cream)}
+header{position:sticky;top:0;z-index:1000;background:var(--glass);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:12px 0}
+.nav-container{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--font-display);font-weight:600;font-size:1.05rem;cursor:pointer;border:none;background:none;color:var(--ink)}
+.logo-mark{width:40px;height:40px;border-radius:10px;background:var(--forest);display:flex;align-items:center;justify-content:center;color:var(--cream);font-family:var(--font-body);font-weight:800;font-size:.8rem;flex-shrink:0}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-links a{font-weight:600;font-size:.9rem;padding:8px 12px;border-radius:999px;transition:color .2s,background .2s;color:var(--muted);cursor:pointer;position:relative}
+.nav-links a:hover,.nav-links a.active{color:var(--forest);background:rgba(45,106,79,.08)}
+.nav-links a.active::after{content:'';position:absolute;left:12px;right:12px;bottom:4px;height:2px;border-radius:2px;background:var(--forest)}
+.hamburger{display:none;cursor:pointer;flex-direction:column;gap:5px;background:none;border:none;padding:8px}
+.hamburger span{width:22px;height:2.5px;background:var(--ink);border-radius:2px}
+.kicker{text-align:center;font-size:.7rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--forest);margin-bottom:10px}
+.hero-title{font-family:var(--font-display);font-size:clamp(2.2rem,6vw,3.5rem);font-weight:600;text-align:center;margin-bottom:14px;line-height:1.1;letter-spacing:-.03em}
+.hero-desc{text-align:center;max-width:620px;margin:0 auto 28px;font-size:1.05rem;color:var(--muted)}
+.carousel-container{position:relative;max-width:960px;margin:0 auto 20px;border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line);aspect-ratio:4/3;background:#e5e0d6}
+@media(min-width:640px){.carousel-container{aspect-ratio:16/9}}
+.carousel-slides{display:flex;transition:transform .55s cubic-bezier(.25,1,.5,1);height:100%}
+.slide{min-width:100%;position:relative;height:100%}
+.slide img{width:100%;height:100%;object-fit:cover}
+.slide-caption{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);background:rgba(255,253,248,.9);backdrop-filter:blur(10px);padding:8px 18px;border-radius:999px;font-weight:600;font-size:.85rem;color:var(--ink);white-space:nowrap;max-width:90%;overflow:hidden;text-overflow:ellipsis;border:1px solid var(--line)}
+.carousel-btn{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;background:rgba(26,33,28,.35);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.25);border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:18px;color:#fff;user-select:none;z-index:5}
+.carousel-btn:hover{background:rgba(45,106,79,.85)}
+.prev-btn{left:10px}.next-btn{right:10px}
+.carousel-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:6px;z-index:5}
+.carousel-dots button{width:7px;height:7px;border-radius:999px;border:none;background:rgba(255,255,255,.5);cursor:pointer;padding:0;transition:width .2s,background .2s}
+.carousel-dots button.active{width:22px;background:#fff}
+.slogan-rotator{text-align:center;margin:28px auto 8px;max-width:640px;min-height:3.8rem;position:relative}
+.slogan-rotator .label{font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:6px}
+.slogan-rotator .line{position:absolute;left:0;right:0;font-family:var(--font-display);font-size:clamp(1.05rem,3vw,1.3rem);font-weight:500;color:var(--ink);opacity:0;transform:translateY(6px);transition:opacity .45s,transform .45s;padding:0 8px}
+.slogan-rotator .line.active{opacity:1;transform:translateY(0);position:relative}
+.slogan-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:28px auto 0;max-width:720px}
+@media(min-width:560px){.slogan-grid{grid-template-columns:1fr 1fr}}
+.slogan-chip{background:var(--cream);border:1px solid var(--line);border-radius:14px;padding:14px 16px;font-size:.9rem;font-weight:500;box-shadow:var(--shadow)}
+.main-counter-wrapper{text-align:center;margin:48px 0 36px}
+.main-counter{font-family:var(--font-display);font-size:clamp(3.5rem,12vw,6.5rem);font-weight:600;color:var(--forest);line-height:1;font-variant-numeric:tabular-nums}
+.main-counter-label{font-size:.95rem;font-weight:600;color:var(--muted);margin-top:8px;letter-spacing:.04em;text-transform:uppercase}
+.action-cards{display:grid;grid-template-columns:1fr;gap:14px;margin-top:28px}
+@media(min-width:640px){.action-cards{grid-template-columns:repeat(3,1fr)}}
+.action-card{background:var(--cream);padding:24px 20px;border-radius:var(--radius);text-align:center;box-shadow:var(--shadow);border:1px solid var(--line);transition:transform .2s}
+.action-card:hover{transform:translateY(-3px)}
+.action-icon{width:48px;height:48px;margin:0 auto 12px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.35rem;background:rgba(45,106,79,.1)}
+.action-card h3{font-family:var(--font-display);font-size:1.05rem;font-weight:600;margin-bottom:8px}
+.action-card p{font-size:.9rem;color:var(--muted)}
+.section-title{font-family:var(--font-display);font-size:clamp(1.7rem,4vw,2.4rem);font-weight:600;margin-bottom:12px;letter-spacing:-.02em}
+.section-lead{color:var(--muted);margin-bottom:28px;max-width:640px}
+.author-block{display:flex;align-items:center;gap:28px;background:var(--cream);padding:28px;border-radius:24px;box-shadow:var(--shadow);border:1px solid var(--line);margin:28px 0}
+.author-photo{flex-shrink:0;width:120px;height:120px;border-radius:50%;background:var(--forest);display:flex;align-items:center;justify-content:center;color:var(--cream);font-family:var(--font-display);font-weight:600;font-size:1.8rem;border:4px solid var(--cream);box-shadow:0 10px 28px rgba(30,77,56,.2)}
+.author-desc h3{font-family:var(--font-display);font-size:1.4rem;font-weight:600;margin-bottom:6px}
+.author-role{font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin-bottom:10px}
+.contact-block{text-align:center;margin-top:36px;padding:32px 24px;border-radius:24px;background:var(--forest-deep);color:var(--cream);box-shadow:var(--shadow)}
+.contact-block h3{font-family:var(--font-display);font-size:1.4rem;font-weight:600;margin-bottom:8px}
+.contact-block p{opacity:.85;margin-bottom:20px;font-size:.95rem;color:var(--sage)}
+.contact-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.contact-block .btn{background:var(--forest)}.contact-block .btn:hover{background:var(--moss)}
+.contact-block .btn-blue{background:var(--blue)}.contact-block .btn-blue:hover{background:#1d4ed8}
+.contact-meta{margin-top:16px;font-size:.8rem;color:var(--sage)}
+.podium{display:flex;flex-direction:column;gap:12px;margin:28px 0 36px}
+@media(min-width:640px){.podium{flex-direction:row;justify-content:center;align-items:flex-end;gap:16px}}
+.podium-place{text-align:center;flex:1;background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:22px 16px;box-shadow:var(--shadow)}
+.podium-place.first{order:-1;border-color:rgba(45,106,79,.35)}
+@media(min-width:640px){.podium-place.first{order:0;padding:28px 16px 32px;transform:translateY(-8px)}}
+.podium-avatar{width:72px;height:72px;border-radius:50%;margin:0 auto 12px;display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--cream);background:var(--blue);font-family:var(--font-display)}
+.podium-place.first .podium-avatar{width:88px;height:88px;background:var(--forest);font-size:1.2rem}
+.rank-badge{font-weight:700;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.rank-1{color:var(--forest)}.rank-2{color:var(--blue)}.rank-3{color:var(--cyan)}
+.rating-wrap{overflow-x:auto;border-radius:var(--radius);box-shadow:var(--shadow);border:1px solid var(--line);background:var(--cream);margin-bottom:48px}
+.rating-table{width:100%;min-width:320px;border-collapse:collapse}
+.rating-table th,.rating-table td{padding:12px 16px;text-align:left;border-bottom:1px solid rgba(26,33,28,.06);font-size:.92rem}
+.rating-table th{background:rgba(45,106,79,.06);font-weight:700;color:var(--muted);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase}
+.rating-table td:last-child,.rating-table th:last-child{text-align:right;font-variant-numeric:tabular-nums}
+.stat-counters{display:grid;grid-template-columns:1fr;gap:14px;text-align:center}
+@media(min-width:560px){.stat-counters{grid-template-columns:repeat(3,1fr)}}
+.stat-item{background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:24px 16px;box-shadow:var(--shadow)}
+.stat-item h3{font-family:var(--font-display);font-size:clamp(2rem,5vw,2.6rem);font-weight:600;color:var(--forest);font-variant-numeric:tabular-nums}
+.stat-item:nth-child(2) h3{color:var(--blue)}
+.stat-item p{color:var(--muted);font-size:.9rem;margin-top:4px}
+.archive-grid{display:grid;gap:22px}
+.archive-card{background:var(--cream);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:1px solid var(--line)}
+.archive-card.highlight{border-color:var(--forest);box-shadow:0 0 0 3px rgba(45,106,79,.18)}
+.ba-frame{position:relative;aspect-ratio:3/2;overflow:hidden;cursor:ew-resize;user-select:none;background:#e5e0d6;touch-action:none}
+.ba-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba-before-wrap{position:absolute;inset:0;overflow:hidden;width:52%}
+.ba-before-wrap img{width:100%;max-width:none;height:100%;object-fit:cover;object-position:left center}
+.ba-handle{position:absolute;top:0;bottom:0;width:2px;background:#fff;left:52%;z-index:3;transform:translateX(-50%);pointer-events:none}
+.ba-knob{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:36px;height:36px;border-radius:50%;background:#fff;border:1px solid var(--line);box-shadow:0 4px 14px rgba(0,0,0,.12);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--ink);letter-spacing:-1px}
+.ba-tag{position:absolute;top:10px;z-index:4;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:999px;color:#fff;pointer-events:none}
+.ba-tag.before{left:10px;background:rgba(26,33,28,.75)}
+.ba-tag.after{right:10px;background:var(--forest)}
+.archive-info{padding:18px 18px 20px;display:flex;flex-direction:column;gap:14px}
+@media(min-width:640px){.archive-info{flex-direction:row;align-items:flex-end;justify-content:space-between}}
+.archive-author{font-weight:700;font-size:.85rem;color:var(--blue)}
+.archive-desc{font-size:.9rem;color:var(--muted);margin-top:4px}
+.archive-title{font-family:var(--font-display);font-size:1.05rem;font-weight:600;margin-top:2px}
+.card-actions{display:flex;flex-wrap:wrap;gap:8px;flex-shrink:0}
+.action-btn{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 14px;border-radius:999px;background:var(--paper);border:1px solid var(--line);cursor:pointer;font-size:.8rem;font-weight:600;color:var(--ink);font-family:inherit}
+.action-btn:hover{border-color:var(--forest);color:var(--forest)}
+.share-manual{width:100%;font-size:.78rem;color:var(--muted);word-break:break-all;margin-top:6px}
+.steps{display:grid;gap:12px;margin:24px 0 36px}
+@media(min-width:640px){.steps{grid-template-columns:repeat(3,1fr)}}
+.step{background:var(--cream);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow)}
+.step-n{font-family:var(--font-display);font-weight:600;color:var(--forest);font-size:.85rem;margin-bottom:8px}
+.step h3{font-family:var(--font-display);font-weight:600;font-size:1.05rem}
+.events-list{background:var(--cream);border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-bottom:36px;box-shadow:var(--shadow)}
+.event-row{padding:16px 18px;border-bottom:1px solid rgba(26,33,28,.06);display:flex;gap:14px}
+.event-row:last-child{border-bottom:none}
+.event-date{flex-shrink:0;width:88px;font-size:.72rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--forest)}
+.faq{background:var(--cream);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:28px}
+.faq-item{border-bottom:1px solid rgba(26,33,28,.06)}.faq-item:last-child{border-bottom:none}
+.faq-q{width:100%;text-align:left;background:none;border:none;padding:16px 18px;font-family:inherit;font-size:.95rem;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;gap:12px;color:var(--ink)}
+.faq-a{display:none;padding:0 18px 16px;font-size:.9rem;color:var(--muted)}
+.faq-item.open .faq-a{display:block}
+.cta-strip{display:flex;flex-direction:column;gap:14px;padding:22px;border-radius:18px;background:var(--cream);border:1px solid var(--line);box-shadow:var(--shadow)}
+@media(min-width:640px){.cta-strip{flex-direction:row;align-items:center;justify-content:space-between}}
+footer{background:var(--cream);padding:40px 0 28px;margin-top:40px;border-top:1px solid var(--line);text-align:center}
+.footer-links{margin-top:14px;display:flex;justify-content:center;flex-wrap:wrap;gap:16px}
+.footer-link{color:var(--muted);font-weight:600;font-size:.9rem}.footer-link:hover{color:var(--forest)}
+.footer-copy{margin-top:18px;font-size:.78rem;color:var(--sage)}
+@media(max-width:768px){
+.nav-links{position:absolute;top:64px;left:0;right:0;background:rgba(255,253,248,.97);backdrop-filter:blur(16px);flex-direction:column;align-items:stretch;padding:12px;box-shadow:0 12px 28px rgba(30,77,56,.08);transform:translateY(-120%);opacity:0;pointer-events:none;transition:transform .3s,opacity .3s;z-index:900;border-bottom:1px solid var(--line)}
+.nav-links.active{transform:translateY(0);opacity:1;pointer-events:auto}
+.nav-links a{padding:12px 14px;border-radius:12px}.nav-links a.active::after{display:none}
+.hamburger{display:flex}
+.author-block{flex-direction:column;text-align:center;gap:16px;padding:22px 18px}
+.author-photo{width:100px;height:100px;font-size:1.5rem}
+.container{padding:0 12px}
+}
+    </style>
+</head>
+<body>
+<header>
+  <div class="container nav-container">
+    <button type="button" class="logo" id="logoBtn" aria-label="На главную">
+      <span class="logo-mark"><img src="img/system/logo.png"></span>
+      <span>Sam<span class="gradient-text">EICO</span></span>
+    </button>
+    <nav>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#home" class="nav-item active" data-section="home">Главная</a></li>
+        <li><a href="#info" class="nav-item" data-section="info">Инфо</a></li>
+        <li><a href="#achievements" class="nav-item" data-section="achievements">Достижения</a></li>
+        <li><a href="#archive" class="nav-item" data-section="archive">Архив</a></li>
+        <li><a href="#more" class="nav-item" data-section="more">Ещё</a></li>
+      </ul>
+    </nav>
+    <button type="button" class="hamburger" id="hamburger" aria-label="Меню"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<main class="container" style="padding-top:12px">
+<section id="home" class="section active">
+  <p class="kicker">Самара · общественная инициатива</p>
+  <h1 class="hero-title">Sam<span class="gradient-text">EICO</span></h1>
+  <p class="hero-desc">Новый экологический проект. Давайте вместе превратим Самару в город будущего — чистый, зелёный и комфортный для жизни.</p>
+  <div class="carousel-container">
+    <div class="carousel-slides" id="carouselSlides"></div>
+    <button type="button" class="carousel-btn prev-btn" id="prevBtn" aria-label="Назад">&#10094;</button>
+    <button type="button" class="carousel-btn next-btn" id="nextBtn" aria-label="Вперёд">&#10095;</button>
+    <div class="carousel-dots" id="carouselDots"></div>
+  </div>
+  <div class="slogan-rotator" id="sloganRotator"><div class="label">Наш слоган</div></div>
+  <div class="slogan-grid" id="sloganGrid"></div>
+  <div class="main-counter-wrapper">
+    <div class="main-counter" data-count="1">0</div>
+    <div class="main-counter-label">дворов мы уже очистили</div>
+  </div>
+  <div class="action-cards">
+    <div class="action-card"><div class="action-icon">🗑️</div><h3>Не мусорить</h3><p>Чисто не там, где убирают, а там, где не мусорят.</p></div>
+    <div class="action-card"><div class="action-icon">🧹</div><h3>Убирать за собой</h3><p>После отдыха на природе заберите мусор с собой.</p></div>
+    <div class="action-card"><div class="action-icon">✊</div><h3>Объяснять</h3><p>Объясняйте родным и близким, почему убирать мусор за собой - очень важно.</p></div>
+  </div>
+</section>
+<section id="info" class="section">
+  <p class="kicker">О проекте</p>
+  <h2 class="section-title">Мониторинг, субботники и дворы, в которые хочется выйти</h2>
+  <p class="section-lead">SamEICO — общественная инициатива. Мы собираем людей, фиксируем свалки и грязные места, очищаем остановочные павильоны и оставляем после себя чистоту, а не только фото. Чтобы присоединиться к проекту, участвовать в нашем рейтинге и попасть в архив работ - представьте себя нам здесь: <a href="https://t.me/sameico">@sameico</a>, после чего отправляйте нам фото до/после ваших благодеяний, с подробностями (адресом, проделанной работой). Мы уважаем любой труд!</p>
+  <div class="author-block">
+    <div class="author-photo" aria-hidden="true"></div>
+    <div class="author-desc">
+      <p class="author-role">Основатель проекта</p>
+      <h3>Kivasily (Кривцов Василий)</h3>
+      <p>Юный эко-активист. «Я верю, что каждый житель Самары может внести свой вклад в красоту нашего города.»</p>
+    </div>
+  </div>
+  <div class="contact-block">
+    <h3>Присоединяйся к нам!</h3>
+    <p>Есть идея или хочешь помочь анонимно? Имя не обязательно.</p>
+    <div class="contact-actions">
+      <a class="btn" href="https://t.me/sameico" target="_blank" rel="noopener noreferrer">Написать в Telegram</a>
+      <a class="btn btn-blue" href="mailto:hello@sameico.ru?subject=SamEICO%20—%20хочу%20помочь">Отправить Email</a>
+    </div>
+    <p class="contact-meta">@sameico · hello@sameico.ru</p>
+  </div>
+</section>
+<section id="achievements" class="section">
+  <p class="kicker">Рейтинг</p>
+  <h2 class="section-title">Топ активистов</h2>
+  <p class="section-lead">Баллы за выходы, количество очищенных дворов и другое.</p>
+  <div class="podium">
+    <div class="podium-place"><div class="podium-avatar">ЕС</div><div class="rank-badge rank-2">2 место</div><h4>Елена С.</h4><p>870 баллов</p></div>
+    <div class="podium-place first"><div class="podium-avatar">ДК</div><div class="rank-badge rank-1">1 место</div><h4>Дмитрий К.</h4><p>1250 баллов</p></div>
+    <div class="podium-place"><div class="podium-avatar">АП</div><div class="rank-badge rank-3">3 место</div><h4>Анна П.</h4><p>750 баллов</p></div>
+  </div>
+  <div class="rating-wrap">
+    <table class="rating-table"><thead><tr><th>Место</th><th>Имя</th><th>Баллы</th></tr></thead><tbody id="ratingBody"></tbody></table>
+  </div>
+  <h2 class="section-title" style="font-size:1.6rem">Общая статистика</h2>
+  <div class="stat-counters">
+    <div class="stat-item"><h3 data-count="1">0</h3><p>Подъездов убрано</p></div>
+    <div class="stat-item"><h3 data-count="0">0</h3><p>Ям залатано</p></div>
+    <div class="stat-item"><h3 data-count="0">0</h3><p>Кг мусора вывезено</p></div>
+  </div>
+</section>
+<section id="archive" class="section">
+  <p class="kicker">Было / стало</p>
+  <h2 class="section-title">Архив работ</h2>
+  <p class="section-lead">Архив всех задокументированных выполненных работ. Тяните ползунок по фото.</p>
+  <div class="archive-grid" id="archiveGrid"></div>
+</section>
+<section id="more" class="section">
+  <p class="kicker">Ещё</p>
+  <h2 class="section-title">Как присоединиться</h2>
+  <p class="section-lead">Три шага, акции и ответы на вопросы.</p>
+  <div class="steps">
+    <div class="step"><div class="step-n">01</div><h3>Напишите нам</h3><p style="color:var(--muted);font-size:.9rem;margin-top:6px">Кто вы (можно анонимно, в таком случае предоставьте уникальный ник) и чем готовы помочь. Каждый выполняет свою работу индивидуально, а наш сайт собирает общие достижения и объединяет людей.</p></div>
+    <div class="step"><div class="step-n">02</div><h3>Участвуйте в акциях</h3><p style="color:var(--muted);font-size:.9rem;margin-top:6px">Дата — ниже и в Telegram. В один день люди из разных районов объединяются, и каждый индивидуально выходит на акции по определенной теме.</p></div>
+    <div class="step"><div class="step-n">03</div><h3>Заберите привычку домой</h3><p style="color:var(--muted);font-size:.9rem;margin-top:6px">Главное — чистый двор без нового мусора.</p></div>
+  </div>
+  <h3 class="section-title" style="font-size:1.25rem">Ближайшие акции</h3>
+  <div class="events-list">
+    <div class="event-row"><div class="event-date">6 сентября</div><div><strong>Уборка дворов</strong><div style="font-size:.88rem;color:var(--muted)">Каждый убирает мусор со своего двора, подметает листья.</div></div></div>
+    <div class="event-row"><div class="event-date">20 сентября</div><div><strong>Очистка остановочных павильонов</strong><div style="font-size:.88rem;color:var(--muted)">Каждый убирает мусор с ближайших остановок общественного транспорта.</div></div></div>
+    <div class="event-row"><div class="event-date">4 октября</div><div><strong>Уборка пляжа</strong><div style="font-size:.88rem;color:var(--muted)">Жители Октябрьского района могут выйти на уборку набережной.</div></div></div>
+  </div>
+  <h3 class="section-title" style="font-size:1.25rem">Вопросы</h3>
+  <div class="faq">
+    <div class="faq-item open"><button type="button" class="faq-q">Как попасть в рейтинг? <span>–</span></button><div class="faq-a">Баллы за выходы и участия в акциях. Присылайте фото в Telegram или на почту.</div></div>
+    <div class="faq-item"><button type="button" class="faq-q">Можно ли помочь анонимно? <span>+</span></button><div class="faq-a">Да. Все акции ведутся индивидуально, а если хотите попасть в рейтинг/архив анонимно - присылайте ваш ник, когда присоединяетесь к проекту вместо вашего имени.</div></div>
+    <div class="faq-item"><button type="button" class="faq-q">Как предложить свой двор? <span>+</span></button><div class="faq-a">Опишите адрес и проблему — опубликуем на сайте и в Telegram канале предложение по очистке вашего двора.</div></div>
+    <div class="faq-item"><button type="button" class="faq-q">Это официальная организация? <span>+</span></button><div class="faq-a">Полностью общественная инициатива. Не УК и не мэрия.</div></div>
+  </div>
+  <div class="cta-strip">
+    <div><strong>Готовы выйти в свой двор?</strong><div style="font-size:.9rem;color:var(--muted)">Напишите — ответим в течение дня.</div></div>
+    <div class="contact-actions">
+      <a class="btn" href="https://t.me/sameico" target="_blank" rel="noopener noreferrer">Telegram</a>
+      <a class="btn btn-outline" href="mailto:hello@sameico.ru">Email</a>
+    </div>
+  </div>
+</section>
+</main>
+<footer>
+  <div class="container">
+    <div style="font-family:var(--font-display);font-weight:600;font-size:1.25rem">Sam<span class="gradient-text">EICO</span></div>
+    <div class="footer-links">
+      <a href="https://t.me/sameico" class="footer-link" target="_blank" rel="noopener noreferrer">Telegram - Модер</a>
+      <a href="https://t.me/samaraeico" class="footer-link" target="_blank" rel="noopener noreferrer">Telegram Канал</a>
+      <a href="mailto:hello@sameico.ru" class="footer-link">Email</a>
+    </div>
+    <p class="footer-copy">2026 SamEICO. Самара.</p>
+  </div>
+</footer>
+<script>
+(function(){
+'use strict';
+var slidesData=[
+{src:'img/system/naberezh-main.jpg',text:'Чистая набережная Волги'},
+{src:'img/system/samara-cosmos-main.jpg',text:'Музей Самара Космическая'},
+{src:'img/system/main-ploshad.jpeg',text:'Площадь Куйбышева'}
+];
+var slogans=['Давайте сделаем всю Самару такой, как на Набережной','Чисто не там, где убирают — там, где не мусорят','Один двор. Один субботник. Целый город.','Зелень во дворе — гордость в доме','Не жди субботник. Начни с подъезда.','Город будущего начинается у своего дома','Самара может быть чистой. Если мы вместе.'];
+var rankingRest=[{place:4,name:'Алексей М.',score:690},{place:5,name:'Мария К.',score:640},{place:6,name:'Сергей В.',score:610},{place:7,name:'Ольга Н.',score:575},{place:8,name:'Павел Р.',score:540},{place:9,name:'Наталья Л.',score:505},{place:10,name:'Игорь Т.',score:470},{place:11,name:'Юлия Ф.',score:445},{place:12,name:'Андрей Ш.',score:420},{place:13,name:'Виктория Д.',score:395},{place:14,name:'Роман Б.',score:370},{place:15,name:'Светлана Г.',score:348},{place:16,name:'Никита З.',score:325},{place:17,name:'Татьяна Е.',score:302},{place:18,name:'Кирилл У.',score:280},{place:19,name:'Дарья Ч.',score:258},{place:20,name:'Максим Я.',score:236}];
+/*
+  АРХИВ «БЫЛО / СТАЛО» — для каждой карточки ДВЕ фотографии:
+  before = фото ДО, after = фото ПОСЛЕ
+  Локально: положите файлы рядом с HTML и укажите пути, например:
+    before: 'photos/yard-before.jpg',
+    after:  'photos/yard-after.jpg'
+*/
+var archiveData=[
+{id:'leningradskaya',author:'Алексей М.',title:'Субботник на Ленинградской',desc:'Двор у дома 48: вывезли 180 кг мусора.',before:'https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&w=900&q=80',after:'https://images.unsplash.com/photo-1611288870280-4a39556b3c9a?auto=format&fit=crop&w=900&q=80'},
+{id:'trees',author:'Мария К.',title:'Посадка деревьев во дворе',desc:'Саженцы липы вдоль дома.',before:'https://images.unsplash.com/photo-1565610222536-ef125c59da2c?auto=format&fit=crop&w=900&q=80',after:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80'},
+{id:'beach',author:'Группа «Эко»',title:'Уборка пляжа',desc:'Собрали пластик вдоль Волги.',before:'https://images.unsplash.com/photo-1595278069441-2cf29f8005e4?auto=format&fit=crop&w=900&q=80',after:'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=80'}
+];
+var SECTIONS=['home','info','achievements','archive','more'];
+var navLinks=document.querySelectorAll('.nav-item');
+var sections=document.querySelectorAll('.section');
+var hamburger=document.getElementById('hamburger');
+var navList=document.getElementById('navLinks');
+function parseHash(){var raw=(window.location.hash||'').replace(/^#/,'');if(!raw)return{section:'home',item:null};var p=raw.split('/');if(SECTIONS.indexOf(p[0])===-1)return{section:'home',item:null};return{section:p[0],item:p[1]||null}}
+function setHash(section,item){var next=item?section+'/'+item:(section==='home'?'':section);var base=window.location.pathname+window.location.search;var target=next?base+'#'+next:base;try{window.history.pushState({section:section,item:item},'',target)}catch(e){try{window.location.hash=next}catch(e2){}}}
+function switchTab(targetId,item){sections.forEach(function(s){s.classList.remove('active')});navLinks.forEach(function(l){l.classList.remove('active')});var el=document.getElementById(targetId);if(el)el.classList.add('active');var a=document.querySelector('.nav-item[data-section="'+targetId+'"]');if(a)a.classList.add('active');navList.classList.remove('active');window.scrollTo({top:0,behavior:'smooth'});window.setTimeout(observeCounters,50);if(targetId==='archive'&&item){window.setTimeout(function(){var c=document.getElementById('archive-item-'+item);if(c){c.classList.add('highlight');c.scrollIntoView({behavior:'smooth',block:'center'})}},200)}}
+function navigate(section,item){setHash(section,item||null);switchTab(section,item||null)}
+function syncFromLocation(){var p=parseHash();switchTab(p.section,p.item)}
+navLinks.forEach(function(link){link.addEventListener('click',function(e){e.preventDefault();navigate(link.getAttribute('data-section'))})});
+document.getElementById('logoBtn').addEventListener('click',function(){navigate('home')});
+hamburger.addEventListener('click',function(){navList.classList.toggle('active')});
+window.addEventListener('hashchange',syncFromLocation);window.addEventListener('popstate',syncFromLocation);
+var track=document.getElementById('carouselSlides'),dotsWrap=document.getElementById('carouselDots'),currentSlide=0,totalSlides=slidesData.length,slideTimer=null;
+slidesData.forEach(function(slide,i){var div=document.createElement('div');div.className='slide';div.innerHTML='<img src="'+slide.src+'" alt="'+slide.text+'"><div class="slide-caption">'+slide.text+'</div>';track.appendChild(div);var dot=document.createElement('button');dot.type='button';if(i===0)dot.className='active';dot.addEventListener('click',function(){currentSlide=i;updateCarousel();resetTimer()});dotsWrap.appendChild(dot)});
+function updateCarousel(){track.style.transform='translateX(-'+(currentSlide*100)+'%)';dotsWrap.querySelectorAll('button').forEach(function(d,i){d.classList.toggle('active',i===currentSlide)})}
+function nextSlide(){currentSlide=(currentSlide+1)%totalSlides;updateCarousel()}
+function prevSlide(){currentSlide=(currentSlide-1+totalSlides)%totalSlides;updateCarousel()}
+function resetTimer(){clearInterval(slideTimer);if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;slideTimer=setInterval(nextSlide,5000)}
+document.getElementById('nextBtn').addEventListener('click',function(){nextSlide();resetTimer()});
+document.getElementById('prevBtn').addEventListener('click',function(){prevSlide();resetTimer()});
+resetTimer();
+var rotator=document.getElementById('sloganRotator'),sloganIdx=0;
+slogans.forEach(function(s,i){var p=document.createElement('div');p.className='line'+(i===0?' active':'');p.textContent='«'+s+'»';rotator.appendChild(p)});
+var grid=document.getElementById('sloganGrid');
+slogans.slice(1,5).forEach(function(s){var c=document.createElement('div');c.className='slogan-chip';c.textContent=s;grid.appendChild(c)});
+if(!window.matchMedia('(prefers-reduced-motion: reduce)').matches){setInterval(function(){var lines=rotator.querySelectorAll('.line');lines[sloganIdx].classList.remove('active');sloganIdx=(sloganIdx+1)%slogans.length;lines[sloganIdx].classList.add('active')},4200)}
+var counterStarted=new WeakSet();
+function animateCounter(el){if(counterStarted.has(el))return;counterStarted.add(el);var target=parseInt(el.getAttribute('data-count'),10)||0;if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){el.textContent=target.toLocaleString('ru-RU');return}var start=performance.now();function tick(now){var t=Math.min(1,(now-start)/1100);var eased=1-Math.pow(1-t,3);el.textContent=Math.round(target*eased).toLocaleString('ru-RU');if(t<1)requestAnimationFrame(tick)}requestAnimationFrame(tick)}
+var counterObserver=null;
+function observeCounters(){if(counterObserver)counterObserver.disconnect();counterObserver=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting)animateCounter(e.target)})},{threshold:.25});document.querySelectorAll('[data-count]').forEach(function(el){counterObserver.observe(el)})}
+var ratingBody=document.getElementById('ratingBody');
+rankingRest.forEach(function(row){var tr=document.createElement('tr');tr.innerHTML='<td>'+row.place+'</td><td>'+row.name+'</td><td>'+row.score.toLocaleString('ru-RU')+'</td>';ratingBody.appendChild(tr)});
+function getShareableUrl(hash){var n=hash.charAt(0)==='#'?hash:'#'+hash;try{var protocol=window.location.protocol,origin=window.location.origin;if(protocol==='file:'||origin==='null'||origin==='file://'||!origin)return n;var url=new URL(window.location.pathname||'/',origin);url.hash=n.slice(1);url.search='';return url.toString()}catch(e){return n}}
+function fallbackCopy(text){try{var input=document.createElement('textarea');input.value=text;input.setAttribute('readonly','');input.style.cssText='position:fixed;left:-9999px';document.body.appendChild(input);input.select();var ok=document.execCommand('copy');document.body.removeChild(input);return ok}catch(e){return false}}
+function copyText(text){return new Promise(function(resolve){if(navigator.clipboard&&window.isSecureContext){navigator.clipboard.writeText(text).then(function(){resolve(true)}).catch(function(){resolve(fallbackCopy(text))})}else resolve(fallbackCopy(text))})}
+function isMobileShare(){return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&window.innerWidth<768)}
+function shareLink(title,text,hash){var url=getShareableUrl(hash);var can=isMobileShare()&&typeof navigator.share==='function'&&window.isSecureContext&&(url.indexOf('http://')===0||url.indexOf('https://')===0);if(can){return navigator.share({title:title,text:text,url:url}).then(function(){return{result:'shared',url:url}}).catch(function(err){if(err&&err.name==='AbortError')return{result:'manual',url:url};return copyText(url).then(function(ok){return{result:ok?'copied':'manual',url:url}})})}return copyText(url).then(function(ok){return{result:ok?'copied':'manual',url:url}})}
+function downloadFile(src,filename){fetch(src).then(function(res){if(!res.ok)throw new Error('x');return res.blob()}).then(function(blob){var o=URL.createObjectURL(blob);var a=document.createElement('a');a.href=o;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(o)},1500)}).catch(function(){try{window.open(src,'_blank','noopener,noreferrer')}catch(e){}})}
+var archiveGrid=document.getElementById('archiveGrid');
+archiveData.forEach(function(item){
+var card=document.createElement('article');card.className='archive-card';card.id='archive-item-'+item.id;
+card.innerHTML='<div class="ba-frame" data-ba><img class="ba-after" src="'+item.after+'" alt="'+item.title+' — стало"><div class="ba-before-wrap"><img class="ba-before" src="'+item.before+'" alt="'+item.title+' — было"></div><div class="ba-handle"><div class="ba-knob">‹ ›</div></div><span class="ba-tag before">Было</span><span class="ba-tag after">Стало</span></div><div class="archive-info"><div><div class="archive-author">'+item.author+'</div><div class="archive-title">'+item.title+'</div><div class="archive-desc">'+item.desc+'</div></div><div class="card-actions"><button type="button" class="action-btn share-btn">🔗 Ссылка</button><button type="button" class="action-btn download-btn">⬇ Скачать</button><div class="share-manual" hidden></div></div></div>';
+archiveGrid.appendChild(card);initBeforeAfter(card.querySelector('[data-ba]'));
+var shareBtn=card.querySelector('.share-btn'),dlBtn=card.querySelector('.download-btn'),manual=card.querySelector('.share-manual');
+shareBtn.addEventListener('click',function(){shareLink('SamEICO — архив','Посмотрите: '+item.title,'archive/'+item.id).then(function(res){if(res.result==='copied'){shareBtn.textContent='✓ Скопировано';setTimeout(function(){shareBtn.textContent='🔗 Ссылка'},2200);manual.hidden=true}else if(res.result==='manual'){manual.hidden=false;manual.textContent='Скопируйте ссылку: '+res.url}}).catch(function(){manual.hidden=false;manual.textContent='Скопируйте: #archive/'+item.id})});
+dlBtn.addEventListener('click',function(){downloadFile(item.after,'sameico-'+item.id+'.jpg')});
+});
+function initBeforeAfter(frame){
+var wrap=frame.querySelector('.ba-before-wrap'),handle=frame.querySelector('.ba-handle'),beforeImg=frame.querySelector('.ba-before');
+var pos=52,dragging=false;
+function setBeforeWidth(){beforeImg.style.width=frame.clientWidth+'px';beforeImg.style.height='100%';beforeImg.style.maxWidth='none';beforeImg.style.objectFit='cover';beforeImg.style.objectPosition='left center'}
+function apply(p){pos=Math.min(96,Math.max(4,p));wrap.style.width=pos+'%';handle.style.left=pos+'%'}
+function fromClientX(x){var rect=frame.getBoundingClientRect();apply(((x-rect.left)/rect.width)*100)}
+setBeforeWidth();apply(pos);
+if(window.ResizeObserver){new ResizeObserver(setBeforeWidth).observe(frame)}
+beforeImg.addEventListener('load',setBeforeWidth);
+frame.addEventListener('pointerdown',function(e){dragging=true;try{frame.setPointerCapture(e.pointerId)}catch(err){}fromClientX(e.clientX)});
+frame.addEventListener('pointermove',function(e){if(dragging)fromClientX(e.clientX)});
+frame.addEventListener('pointerup',function(){dragging=false});
+frame.addEventListener('pointercancel',function(){dragging=false});
+}
+document.querySelectorAll('.faq-q').forEach(function(btn){btn.addEventListener('click',function(){var item=btn.parentElement,was=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');var s=i.querySelector('.faq-q span');if(s)s.textContent='+'});if(!was){item.classList.add('open');var sp=btn.querySelector('span');if(sp)sp.textContent='–'}})});
+observeCounters();syncFromLocation();
+})();
+</script>
+</body>
+</html>
