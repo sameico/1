@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SamEICO — давайте сделаем жизнь в Самаре лучше</title>
-    <meta name="description" content="SamEICO — общественная экологическая инициатива в Самаре.">
+    <meta name="description" content="SamEICO — общественная экологическая инициатива в Самаре. Присоединятесь анонимно и помогайте городу развиваться!">
     <meta name="theme-color" content="#2d6a4f">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -164,6 +164,69 @@ footer{background:var(--cream);padding:40px 0 28px;margin-top:40px;border-top:1p
 .author-photo{width:100px;height:100px;font-size:1.5rem}
 .container{padding:0 12px}
 }
+
+.logo-mark{overflow:hidden;padding:0;background:transparent}
+.logo-mark img{width:100%;height:100%;object-fit:cover;border-radius:10px}
+.author-photo{background-size:cover;background-position:center}
+.ba-shots{
+  position:absolute;right:10px;bottom:10px;z-index:6;
+  display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end;max-width:70%;
+}
+.ba-shot{
+  width:36px;height:36px;min-width:36px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.55);
+  background:rgba(255,253,248,.45);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  color:var(--ink);font-weight:700;font-size:.82rem;
+  font-family:var(--font-body);cursor:pointer;
+  box-shadow:0 4px 14px rgba(26,33,28,.12);
+  transition:background .2s,color .2s,transform .15s;
+}
+.ba-shot:hover{transform:translateY(-1px)}
+.ba-shot.active{
+  background:rgba(45,106,79,.9);color:#fff;border-color:rgba(255,255,255,.35);
+}
+.ba-caption{
+  position:absolute;left:10px;bottom:10px;z-index:6;
+  font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  background:rgba(255,253,248,.86);backdrop-filter:blur(10px);
+  padding:5px 10px;border-radius:999px;border:1px solid var(--line);color:var(--ink);
+  max-width:46%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.tips-wrap{margin:40px 0 8px;max-width:560px}
+.tips-photo{
+  width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:28px;
+  border:1px solid var(--line);box-shadow:var(--shadow);
+}
+.tips-card{
+  margin:-28px 14px 0;position:relative;z-index:2;
+  background:var(--glass);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border:1px solid var(--line);border-radius:20px;padding:20px 22px 22px;
+  box-shadow:var(--shadow);
+  animation:tipsRise .75s ease-out;
+}
+@keyframes tipsRise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+@media(prefers-reduced-motion:reduce){.tips-card{animation:none}}
+.tips-kicker{
+  font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--cyan);margin-bottom:4px;
+}
+.tips-card h3{
+  font-family:var(--font-display);font-size:1.2rem;font-weight:600;
+  color:var(--forest);margin-bottom:8px;
+}
+.tips-card p{font-size:.92rem;color:var(--muted)}
+.tips-list{margin-top:12px;display:grid;gap:8px}
+.tips-list li{display:flex;gap:10px;align-items:flex-start;font-size:.92rem;color:var(--ink)}
+.tips-list .mark{
+  width:8px;height:8px;border-radius:50%;background:var(--forest);
+  margin-top:7px;flex-shrink:0;box-shadow:0 0 0 4px rgba(45,106,79,.12);
+}
+@media(max-width:768px){
+  .ba-shot{width:34px;height:34px;min-width:34px}
+  .tips-card{margin:-22px 10px 0;padding:16px 16px 18px}
+}
     </style>
 </head>
 <body>
@@ -213,7 +276,7 @@ footer{background:var(--cream);padding:40px 0 28px;margin-top:40px;border-top:1p
   <h2 class="section-title">Мониторинг, субботники и дворы, в которые хочется выйти</h2>
   <p class="section-lead">SamEICO — общественная инициатива. Мы собираем людей, фиксируем свалки и грязные места, очищаем остановочные павильоны и оставляем после себя чистоту, а не только фото. Чтобы присоединиться к проекту, участвовать в нашем рейтинге и попасть в архив работ - представьте себя нам здесь: <a href="https://t.me/sameico">@sameico</a>, после чего отправляйте нам фото до/после ваших благодеяний, с подробностями (адресом, проделанной работой). Мы уважаем любой труд!</p>
   <div class="author-block">
-    <div class="author-photo" aria-hidden="true"></div>
+    <div class="author-photo" aria-hidden="true">КВ</div>
     <div class="author-desc">
       <p class="author-role">Основатель проекта</p>
       <h3>Kivasily (Кривцов Василий)</h3>
@@ -252,7 +315,7 @@ footer{background:var(--cream);padding:40px 0 28px;margin-top:40px;border-top:1p
 <section id="archive" class="section">
   <p class="kicker">Было / стало</p>
   <h2 class="section-title">Архив работ</h2>
-  <p class="section-lead">Архив всех задокументированных выполненных работ. Тяните ползунок по фото.</p>
+  <p class="section-lead">Архив всех задокументированных выполненных работ. Тяните ползунок по фото. Если у одного объекта несколько фото — переключайте фото с помощью кнопок справа снизу.</p>
   <div class="archive-grid" id="archiveGrid"></div>
 </section>
 <section id="more" class="section">
@@ -264,10 +327,30 @@ footer{background:var(--cream);padding:40px 0 28px;margin-top:40px;border-top:1p
     <div class="step"><div class="step-n">02</div><h3>Участвуйте в акциях</h3><p style="color:var(--muted);font-size:.9rem;margin-top:6px">Дата — ниже и в Telegram. В один день люди из разных районов объединяются, и каждый индивидуально выходит на акции по определенной теме.</p></div>
     <div class="step"><div class="step-n">03</div><h3>Заберите привычку домой</h3><p style="color:var(--muted);font-size:.9rem;margin-top:6px">Главное — чистый двор без нового мусора.</p></div>
   </div>
+
+  <div class="tips-wrap">
+    <img class="tips-photo" src="img/system/tips.jpg" alt="Что взять с собой на акцию">
+    <div class="tips-card">
+      <div class="tips-kicker">С собой</div>
+      <h3>Советы</h3>
+      <p>Перед выходом, мы рекомендуем Вам собрать простой набор. Этого хватает на двор или остановку. Будьте осторожны и защитите себя.</p>
+      <ul class="tips-list">
+        <li><span class="mark"></span><span>2–3 мешка для мусора</span></li>
+        <li><span class="mark"></span><span>Нитриловые толстые или тканевые перчатки - одна пара</span></li>
+        <li><span class="mark"></span><span>Троутурная метла/щетка и совок — для уборки лисьтьев и мелкого мусора</span></li>
+        <li><span class="mark"></span><span>Бутылка воды и влажные салфетки</span></li>
+        <li><span class="mark"></span><span>Шпатель или щетка с деревянной ручкой — для сдирания рекламных объявлений</span></li>
+        <li><span class="mark"></span><span>Одно или несколько фото до и после с одной точки — для архива</span></li>
+        <li><span class="mark"></span><span>(Опционально) Палка-хваталка — поможет вытаскивать мусор из щелей, не касаясь его и не наклоняясь. Кроме того, лишает риска наступить на острые предметы в траве</span></li>
+        <li><span class="mark"></span><span>(Опционально) Респиратор и очки защитные — для защиты глаз и легких при работе с большим объёмом мусора</span></li>
+      </ul>
+    </div>
+  </div>
+
   <h3 class="section-title" style="font-size:1.25rem">Ближайшие акции</h3>
   <div class="events-list">
-    <div class="event-row"><div class="event-date">6 сентября</div><div><strong>Уборка дворов</strong><div style="font-size:.88rem;color:var(--muted)">Каждый убирает мусор со своего двора, подметает листья.</div></div></div>
-    <div class="event-row"><div class="event-date">20 сентября</div><div><strong>Очистка остановочных павильонов</strong><div style="font-size:.88rem;color:var(--muted)">Каждый убирает мусор с ближайших остановок общественного транспорта.</div></div></div>
+    <div class="event-row"><div class="event-date">20 сентября</div><div><strong>Уборка дворов</strong><div style="font-size:.88rem;color:var(--muted)">Каждый убирает мусор со своего двора, подметает листья.</div></div></div>
+    <div class="event-row"><div class="event-date">30 сентября</div><div><strong>Очистка остановочных павильонов</strong><div style="font-size:.88rem;color:var(--muted)">Каждый убирает мусор с ближайших остановок общественного транспорта.</div></div></div>
     <div class="event-row"><div class="event-date">4 октября</div><div><strong>Уборка пляжа</strong><div style="font-size:.88rem;color:var(--muted)">Жители Октябрьского района могут выйти на уборку набережной.</div></div></div>
   </div>
   <h3 class="section-title" style="font-size:1.25rem">Вопросы</h3>
@@ -305,7 +388,7 @@ var slidesData=[
 {src:'img/system/samara-cosmos-main.jpg',text:'Музей Самара Космическая'},
 {src:'img/system/main-ploshad.jpeg',text:'Площадь Куйбышева'}
 ];
-var slogans=['Давайте сделаем всю Самару чистой!','Чисто не там, где убирают — там, где не мусорят','Один двор. Один субботник. Целый город.','Зелень во дворе — гордость в доме','Не жди субботник. Начни с подъезда.','Город будущего начинается у своего дома','Самара может быть чистой. Если мы вместе.'];
+var slogans=['Давайте сделаем всю Самару такой, как на Набережной','Чисто не там, где убирают — там, где не мусорят','Один двор. Один субботник. Целый город.','Зелень во дворе — гордость в доме','Не жди субботник. Начни с подъезда.','Город будущего начинается у своего дома','Самара может быть чистой. Если мы вместе.'];
 var rankingRest=[{place:4,name:'Алексей М.',score:690},{place:5,name:'Мария К.',score:640},{place:6,name:'Сергей В.',score:610},{place:7,name:'Ольга Н.',score:575},{place:8,name:'Павел Р.',score:540},{place:9,name:'Наталья Л.',score:505},{place:10,name:'Игорь Т.',score:470},{place:11,name:'Юлия Ф.',score:445},{place:12,name:'Андрей Ш.',score:420},{place:13,name:'Виктория Д.',score:395},{place:14,name:'Роман Б.',score:370},{place:15,name:'Светлана Г.',score:348},{place:16,name:'Никита З.',score:325},{place:17,name:'Татьяна Е.',score:302},{place:18,name:'Кирилл У.',score:280},{place:19,name:'Дарья Ч.',score:258},{place:20,name:'Максим Я.',score:236}];
 /*
   АРХИВ «БЫЛО / СТАЛО» — для каждой карточки ДВЕ фотографии:
@@ -315,9 +398,22 @@ var rankingRest=[{place:4,name:'Алексей М.',score:690},{place:5,name:'М
     after:  'photos/yard-after.jpg'
 */
 var archiveData=[
-{id:'leningradskaya',author:'Алексей М.',title:'Субботник на Ленинградской',desc:'Двор у дома 48: вывезли 180 кг мусора.',before:'https://images.unsplash.com/photo-1550989460-0adf9ea622e2?auto=format&fit=crop&w=900&q=80',after:'https://images.unsplash.com/photo-1611288870280-4a39556b3c9a?auto=format&fit=crop&w=900&q=80'},
-{id:'trees',author:'Мария К.',title:'Посадка деревьев во дворе',desc:'Саженцы липы вдоль дома.',before:'https://images.unsplash.com/photo-1565610222536-ef125c59da2c?auto=format&fit=crop&w=900&q=80',after:'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=900&q=80'},
-{id:'beach',author:'Группа «Эко»',title:'Уборка пляжа',desc:'Собрали пластик вдоль Волги.',before:'https://images.unsplash.com/photo-1595278069441-2cf29f8005e4?auto=format&fit=crop&w=900&q=80',after:'https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=900&q=80'}
+{
+  id:'ostanovka-stavropolskaya-alex-matros',
+  author:'Kivasily',
+  title:'Остановка Ставропольская на ул. Александра Матросова - еженедельная уборка',
+  desc:'Убрал разбитое стекло, подмел листья и сигареты. Убрал объявления. Ушло около одного часа.',
+  photos:[
+    {caption:'Остановка',before:'img/user/promishleny/ul-Alexandra-Matrosova-ostanovka-Stavropolskaya-1',after:'img/user/promishleny/ul-Alexandra-Matrosova-ostanovka-Stavropolskaya-6'},
+    {caption:'Мусор у лавочки',before:'img/user/promishleny/ul-Alexandra-Matrosova-ostanovka-Stavropolskaya-2',after:'img/user/promishleny/ul-Alexandra-Matrosova-ostanovka-Stavropolskaya-7'},
+    {caption:'Мусор у лавочки | 2',before:'img/user/promishleny/ul-Alexandra-Matrosova-ostanovka-Stavropolskaya-3',after:'img/user/promishleny/ul-Alexandra-Matrosova-ostanovka-Stavropolskaya-8'},
+    {caption:'Сзади',before:'img/user/promishleny/ul-Alexandra-Matrosova-ostanovka-Stavropolskaya-4',after:'img/user/promishleny/ul-Alexandra-Matrosova-ostanovka-Stavropolskaya-9'},
+    {caption:'Гора мусора | Вид у дороги',before:'img/user/promishleny/ul-Alexandra-Matrosova-ostanovka-Stavropolskaya-5',after:'img/user/promishleny/ul-Alexandra-Matrosova-ostanovka-Stavropolskaya-10'}
+  ]
+},
+{id:'leningradskaya',author:'Алексей М.',title:'Субботник на Ленинградской',desc:'Двор у дома 48: вывезли 180 кг мусора.',before:'img/archive/yard-before.jpg',after:'img/archive/yard-after.jpg'},
+{id:'trees',author:'Мария К.',title:'Посадка деревьев во дворе',desc:'Саженцы липы вдоль дома.',before:'img/archive/trees-before.jpg',after:'img/archive/trees-after.jpg'},
+{id:'beach',author:'Группа «Эко»',title:'Уборка пляжа',desc:'Собрали пластик вдоль Волги.',before:'img/archive/beach-before.jpg',after:'img/archive/beach-after.jpg'}
 ];
 var SECTIONS=['home','info','achievements','archive','more'];
 var navLinks=document.querySelectorAll('.nav-item');
@@ -359,14 +455,65 @@ function copyText(text){return new Promise(function(resolve){if(navigator.clipbo
 function isMobileShare(){return /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent)||(navigator.maxTouchPoints>1&&window.innerWidth<768)}
 function shareLink(title,text,hash){var url=getShareableUrl(hash);var can=isMobileShare()&&typeof navigator.share==='function'&&window.isSecureContext&&(url.indexOf('http://')===0||url.indexOf('https://')===0);if(can){return navigator.share({title:title,text:text,url:url}).then(function(){return{result:'shared',url:url}}).catch(function(err){if(err&&err.name==='AbortError')return{result:'manual',url:url};return copyText(url).then(function(ok){return{result:ok?'copied':'manual',url:url}})})}return copyText(url).then(function(ok){return{result:ok?'copied':'manual',url:url}})}
 function downloadFile(src,filename){fetch(src).then(function(res){if(!res.ok)throw new Error('x');return res.blob()}).then(function(blob){var o=URL.createObjectURL(blob);var a=document.createElement('a');a.href=o;a.download=filename;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(o)},1500)}).catch(function(){try{window.open(src,'_blank','noopener,noreferrer')}catch(e){}})}
+function photoSet(item){
+  if(item.photos && item.photos.length){
+    return item.photos.slice(0,5);
+  }
+  return [{caption:'',before:item.before,after:item.after}];
+}
+function esc(s){
+  return String(s==null?'':s)
+    .replace(/&/g,'&')
+    .replace(/</g,'<')
+    .replace(/>/g,'>')
+    .replace(/"/g,'"')
+    .replace(/'/g,'&#39;');
+}
 var archiveGrid=document.getElementById('archiveGrid');
 archiveData.forEach(function(item){
+var photos=photoSet(item);
+var first=photos[0];
+var shots='';
+if(photos.length>=2){
+  shots='<div class="ba-shots" role="tablist" aria-label="Фото блока">';
+  for(var i=0;i<photos.length;i++){
+    shots+='<button type="button" class="ba-shot'+(i===0?' active':'')+'" data-i="'+i+'" aria-label="Фото '+(i+1)+'">'+(i+1)+'</button>';
+  }
+  shots+='</div>';
+}
+var cap=first.caption?'<div class="ba-caption">'+esc(first.caption)+'</div>':'';
 var card=document.createElement('article');card.className='archive-card';card.id='archive-item-'+item.id;
-card.innerHTML='<div class="ba-frame" data-ba><img class="ba-after" src="'+item.after+'" alt="'+item.title+' — стало"><div class="ba-before-wrap"><img class="ba-before" src="'+item.before+'" alt="'+item.title+' — было"></div><div class="ba-handle"><div class="ba-knob">‹ ›</div></div><span class="ba-tag before">Было</span><span class="ba-tag after">Стало</span></div><div class="archive-info"><div><div class="archive-author">'+item.author+'</div><div class="archive-title">'+item.title+'</div><div class="archive-desc">'+item.desc+'</div></div><div class="card-actions"><button type="button" class="action-btn share-btn">🔗 Ссылка</button><button type="button" class="action-btn download-btn">⬇ Скачать</button><div class="share-manual" hidden></div></div></div>';
-archiveGrid.appendChild(card);initBeforeAfter(card.querySelector('[data-ba]'));
+card.innerHTML='<div class="ba-frame" data-ba><img class="ba-after" src="'+esc(first.after)+'" alt="'+esc(item.title)+' — стало"><div class="ba-before-wrap"><img class="ba-before" src="'+esc(first.before)+'" alt="'+esc(item.title)+' — было"></div><div class="ba-handle"><div class="ba-knob">‹ ›</div></div><span class="ba-tag before">Было</span><span class="ba-tag after">Стало</span>'+cap+shots+'</div><div class="archive-info"><div><div class="archive-author">'+esc(item.author)+'</div><div class="archive-title">'+esc(item.title)+'</div><div class="archive-desc">'+esc(item.desc)+'</div></div><div class="card-actions"><button type="button" class="action-btn share-btn">Ссылка</button><button type="button" class="action-btn download-btn">Скачать</button><div class="share-manual" hidden></div></div></div>';
+archiveGrid.appendChild(card);
+var frame=card.querySelector('[data-ba]');
+var api=initBeforeAfter(frame);
+var idx=0;
+function showShot(n){
+  idx=n;
+  var ph=photos[n];
+  var beforeImg=frame.querySelector('.ba-before');
+  var afterImg=frame.querySelector('.ba-after');
+  beforeImg.src=ph.before;
+  afterImg.src=ph.after;
+  var capEl=frame.querySelector('.ba-caption');
+  if(ph.caption){
+    if(!capEl){
+      capEl=document.createElement('div');
+      capEl.className='ba-caption';
+      frame.appendChild(capEl);
+    }
+    capEl.textContent=ph.caption;
+    capEl.hidden=false;
+  }else if(capEl){capEl.hidden=true;}
+  frame.querySelectorAll('.ba-shot').forEach(function(b,j){b.classList.toggle('active',j===n)});
+  api.reset();
+}
+frame.querySelectorAll('.ba-shot').forEach(function(btn){
+  btn.addEventListener('click',function(e){e.stopPropagation();showShot(parseInt(btn.getAttribute('data-i'),10));});
+});
 var shareBtn=card.querySelector('.share-btn'),dlBtn=card.querySelector('.download-btn'),manual=card.querySelector('.share-manual');
-shareBtn.addEventListener('click',function(){shareLink('SamEICO — архив','Посмотрите: '+item.title,'archive/'+item.id).then(function(res){if(res.result==='copied'){shareBtn.textContent='✓ Скопировано';setTimeout(function(){shareBtn.textContent='🔗 Ссылка'},2200);manual.hidden=true}else if(res.result==='manual'){manual.hidden=false;manual.textContent='Скопируйте ссылку: '+res.url}}).catch(function(){manual.hidden=false;manual.textContent='Скопируйте: #archive/'+item.id})});
-dlBtn.addEventListener('click',function(){downloadFile(item.after,'sameico-'+item.id+'.jpg')});
+shareBtn.addEventListener('click',function(){shareLink('SamEICO — архив','Посмотрите: '+item.title,'archive/'+item.id).then(function(res){if(res.result==='copied'){shareBtn.textContent='Скопировано';setTimeout(function(){shareBtn.textContent='Ссылка'},2200);manual.hidden=true}else if(res.result==='manual'){manual.hidden=false;manual.textContent='Скопируйте ссылку: '+res.url}}).catch(function(){manual.hidden=false;manual.textContent='Скопируйте: #archive/'+item.id})});
+dlBtn.addEventListener('click',function(){downloadFile(photos[idx].after,'sameico-'+item.id+'-'+(idx+1)+'.jpg')});
 });
 function initBeforeAfter(frame){
 var wrap=frame.querySelector('.ba-before-wrap'),handle=frame.querySelector('.ba-handle'),beforeImg=frame.querySelector('.ba-before');
@@ -374,13 +521,18 @@ var pos=52,dragging=false;
 function setBeforeWidth(){beforeImg.style.width=frame.clientWidth+'px';beforeImg.style.height='100%';beforeImg.style.maxWidth='none';beforeImg.style.objectFit='cover';beforeImg.style.objectPosition='left center'}
 function apply(p){pos=Math.min(96,Math.max(4,p));wrap.style.width=pos+'%';handle.style.left=pos+'%'}
 function fromClientX(x){var rect=frame.getBoundingClientRect();apply(((x-rect.left)/rect.width)*100)}
+function reset(){apply(52);setBeforeWidth()}
 setBeforeWidth();apply(pos);
 if(window.ResizeObserver){new ResizeObserver(setBeforeWidth).observe(frame)}
 beforeImg.addEventListener('load',setBeforeWidth);
-frame.addEventListener('pointerdown',function(e){dragging=true;try{frame.setPointerCapture(e.pointerId)}catch(err){}fromClientX(e.clientX)});
+frame.addEventListener('pointerdown',function(e){
+  if(e.target.closest('.ba-shot'))return;
+  dragging=true;try{frame.setPointerCapture(e.pointerId)}catch(err){}fromClientX(e.clientX);
+});
 frame.addEventListener('pointermove',function(e){if(dragging)fromClientX(e.clientX)});
 frame.addEventListener('pointerup',function(){dragging=false});
 frame.addEventListener('pointercancel',function(){dragging=false});
+return {reset:reset};
 }
 document.querySelectorAll('.faq-q').forEach(function(btn){btn.addEventListener('click',function(){var item=btn.parentElement,was=item.classList.contains('open');document.querySelectorAll('.faq-item').forEach(function(i){i.classList.remove('open');var s=i.querySelector('.faq-q span');if(s)s.textContent='+'});if(!was){item.classList.add('open');var sp=btn.querySelector('span');if(sp)sp.textContent='–'}})});
 observeCounters();syncFromLocation();
